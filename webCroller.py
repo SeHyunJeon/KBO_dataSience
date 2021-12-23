@@ -99,9 +99,11 @@ team2 = list()
 for index_split in range(0, len(split)):
     if(split[index_split] == False):
         continue
-        
     team1.append(split[index_split][0])
     team2.append(split[index_split][1])
+    
+    #team1.append(''.join([i for i in split[index_split][0] if not i.isdigit()]))
+    #team2.append(''.join([i for i in split[index_split][1] if not i.isdigit()]))
 
 #team1 리스트와 team2 리스트를 이용하여 dataFrame에 추가
 team1_score = list()
@@ -120,6 +122,15 @@ for i in range(0, len(team1)):
     string = team2[i]
     temp2 = re.findall(r'\d+', string)
     team2_score.append(int(temp2[0]))
+
+team1 = list()
+team2 = list()
+for index_split in range(0, len(split)):
+    if(split[index_split] == False):
+        continue
+    
+    team1.append(''.join([i for i in split[index_split][0] if not i.isdigit()]))
+    team2.append(''.join([i for i in split[index_split][1] if not i.isdigit()]))
 
 df.insert(4, 'TEAM1', team1, True)  
 df.insert(5, 'TEAM1_SCORE', team1_score, True)
