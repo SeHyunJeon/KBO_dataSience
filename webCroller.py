@@ -56,7 +56,7 @@ for year in range(4, 0, -1):
         if(table[0][3] == '데이터가 없습니다.'):
             continue
         
-        #날짜 앞에 년도 붙이기
+        #날짜 형식 맞추기
         if(year==4):
             for i in range(0, len(table)):
                 table[i][0] = '2018-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]

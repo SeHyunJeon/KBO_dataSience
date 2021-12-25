@@ -1,6 +1,6 @@
 import pandas as pd
 
-#데이터 불러오
+#데이터 불러오기
 data = pd.read_excel('2018~2020 KBO 경기 결과.xlsx')
 
 #읽어드린 엑셀 데이터의 1열 및 1행이 nan 값임. 따라서 삭제
@@ -30,8 +30,16 @@ data = data.sort_values('날짜')
 drop_index = data[data['TEAM1_SCORE'] == -1].index
 data.drop(drop_index, inplace=True)
 
+#기온 데이터 불러오기 
+data_asos = pd.read_excel('asos별 기온.xls')
+data_asos['날짜'] = pd.to_datetime(data['날짜'])
+
+data_asos.fillna(method='pad')
+
+data_asos = data_asos.sort_values('날짜')
+
 print(data.dtypes)
+print(data_asos.dtypes)
 
 
-   
 
