@@ -59,16 +59,16 @@ for year in range(4, 0, -1):
         #날짜 앞에 년도 붙이기
         if(year==4):
             for i in range(0, len(table)):
-                table[i][0] = '2018.' + table[i][0]
+                table[i][0] = '2018-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
         elif(year==3):
             for i in range(0, len(table)):
-                table[i][0] = '2019.' + table[i][0]
+                table[i][0] = '2019-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
         elif(year==2):
             for i in range(0, len(table)):
-                table[i][0] = '2020.' + table[i][0]
+                table[i][0] = '2020-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
         elif(year==1):
             for i in range(0, len(table)):
-                table[i][0] = '2021.' + table[i][0]
+                table[i][0] = '2021-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
             
         #결과를 도출하기 위한 최종 테이블에 추가
         result.extend(table)
@@ -80,7 +80,7 @@ del result[1]
 df = pd.DataFrame(data=result[1:], columns=[result[0]])
 
 #필요없는 속성값 삭제
-df = df.drop(['게임센터', '하이라이트', 'TV', '라디오'], axis=1)
+df = df.drop(['게임센터', '하이라이트', 'TV', '라디오', '시간'], axis=1)
 
 
 
@@ -135,10 +135,10 @@ for index_split in range(0, len(split)):
     team1.append(''.join([i for i in split[index_split][0] if not i.isdigit()]))
     team2.append(''.join([i for i in split[index_split][1] if not i.isdigit()]))
 
-df.insert(4, 'TEAM1', team1, True)  
-df.insert(5, 'TEAM1_SCORE', team1_score, True)
-df.insert(6, 'TEAM2', team2, True)
-df.insert(7, 'TEAM2_SCORE', team2_score, True) 
+df.insert(3, 'TEAM1', team1, True)  
+df.insert(4, 'TEAM1_SCORE', team1_score, True)
+df.insert(5, 'TEAM2', team2, True)
+df.insert(6, 'TEAM2_SCORE', team2_score, True) 
 
 #비고 삭제
 df = df.drop(['비고', '경기'], axis=1)
