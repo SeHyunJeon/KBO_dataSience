@@ -48,6 +48,8 @@ data = pd.merge(left=data, right=data_asos, how='left',
 
 data.drop(data.columns[7], axis=1, inplace=True)
 
+data.to_excel ("경기 및 asos.xlsx")
+
 #특정팀의 승리경기 추출
 kia_home_match = data[data['홈팀'] == 'KIA']
 kia_home_wins = kia_home_match[kia_home_match['홈팀 점수'] > kia_home_match['원정팀 점수']]
