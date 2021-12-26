@@ -32,13 +32,13 @@ temp = soup.find("table", {"class":"tbl"})
 result = parser.make2d(temp)
 
 #2018년 02월부터 2020년 12월까지 데이터를 리스트에 추가
-for year in range(4, 0, -1):
+for year in range(3, 0, -1):
     for month in range(0, 12):
-        if(year==4 and month==0):
+        if(year==3 and month==0):
             continue
         
         select_menu=Select(driver.find_element_by_id("ddlYear"))
-        select_menu.select_by_index(year-1)
+        select_menu.select_by_index(year)
         
         select_menu=Select(driver.find_element_by_id("ddlMonth")) 
         select_menu.select_by_index(month)
@@ -57,18 +57,18 @@ for year in range(4, 0, -1):
             continue
         
         #날짜 형식 맞추기, 시간을 기준으로 내림
-        if(year==4):
+        if(year==3):
             for i in range(0, len(table)):
                 table[i][0] = '2018-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
-        elif(year==3):
-            for i in range(0, len(table)):
-                table[i][0] = '2019-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
         elif(year==2):
             for i in range(0, len(table)):
-                table[i][0] = '2020-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
+                table[i][0] = '2019-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
         elif(year==1):
             for i in range(0, len(table)):
-                table[i][0] = '2021-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
+                table[i][0] = '2020-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
+#        elif(year==1):
+#            for i in range(0, len(table)):
+#                table[i][0] = '2021-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
             
         #결과를 도출하기 위한 최종 테이블에 추가
         result.extend(table)
