@@ -31,12 +31,20 @@ drop_index = data[data['TEAM1_SCORE'] == -1].index
 data.drop(drop_index, inplace=True)
 
 #기온 데이터 불러오기 
-data_asos = pd.read_excel('asos별 기온.xls')
-data_asos['날짜'] = pd.to_datetime(data['날짜'])
+data_asos = pd.read_csv('asos_data.csv')
+data_asos['날짜'] = pd.to_datetime(data_asos['날짜'])
 
-data_asos.fillna(method='pad')
-
+#날짜를 기준으로 정렬
 data_asos = data_asos.sort_values('날짜')
+
+#data_asos asos를 object로 변환
+data_asos = data_asos.astype({'asos':'str'})
+
+#asos, 날짜를 기준으로 join
+data = pd.merge(left=data, right=data_asos, how='left',
+                on=['asos', '날짜'], sort=True)
+
+data.drop(data.columns[7], axis=1, inplace=True)
 
 print(data.dtypes)
 print(data_asos.dtypes)

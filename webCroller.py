@@ -56,19 +56,19 @@ for year in range(4, 0, -1):
         if(table[0][3] == '데이터가 없습니다.'):
             continue
         
-        #날짜 형식 맞추기
+        #날짜 형식 맞추기, 시간을 기준으로 내림
         if(year==4):
             for i in range(0, len(table)):
-                table[i][0] = '2018-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
+                table[i][0] = '2018-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
         elif(year==3):
             for i in range(0, len(table)):
-                table[i][0] = '2019-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
+                table[i][0] = '2019-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
         elif(year==2):
             for i in range(0, len(table)):
-                table[i][0] = '2020-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
+                table[i][0] = '2020-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
         elif(year==1):
             for i in range(0, len(table)):
-                table[i][0] = '2021-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1]
+                table[i][0] = '2021-' + table[i][0][0:2] + '-' + table[i][0][3:5] + ' ' + table[i][1][0:3] + '00'
             
         #결과를 도출하기 위한 최종 테이블에 추가
         result.extend(table)
@@ -146,8 +146,6 @@ df = df.drop(['비고', '경기'], axis=1)
 print(df)
 df.to_excel("2018~2020 KBO 경기 결과.xlsx")
 
-#스코어가 -1인 경기들은 취소된 경기들이므로 제거하여야함 
-#팀명에서 점수 제거하여야함 
 
 
 
