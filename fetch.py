@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+
 
 #데이터 불러오기
 data = pd.read_excel('2018~2020 KBO 경기 결과.xlsx')
@@ -8,17 +10,17 @@ data.drop(data.columns[0], axis=1, inplace=True)
 data = data.dropna()
 
 #스코어 열의 형변환
-data = data.astype({'TEAM1_SCORE': 'int'})
-data = data.astype({'TEAM2_SCORE': 'int'})
+data = data.astype({'원정팀 점수': 'int'})
+data = data.astype({'홈팀 점수': 'int'})
 
 #ASOS 데이터프레임 생성
-data_asos = {'구장':['마산', '대구', '잠실', '광주', '문학', '수원', '사직', '대전', '울산', '포항', '청주'], 
-             'asos':['155', '143', '108', '156', '112', '119', '159', '133', '152', '138', '131']}
+data_asos = {'구장':['마산', '창원', '대구', '잠실', '고척', '광주', '문학', '수원', '사직', '대전', '울산', '포항', '청주'], 
+             'asos':['155', '155', '143', '108', '108', '156', '112', '119', '159', '133', '152', '138', '131']}
 
 asos = pd.DataFrame(data_asos)
 
 #구장을 기준으로 join
-data = pd.merge(data, asos, left_on='구장', right_on='구장', how='inner')
+data = pd.merge(data, asos, left_on='구장', right_on='구장', how='left')
 
 #날짜 형식 변환
 data['날짜'] = pd.to_datetime(data['날짜'])
@@ -27,7 +29,7 @@ data['날짜'] = pd.to_datetime(data['날짜'])
 data = data.sort_values('날짜')
 
 #취소된 경기들 삭제(점수가 -1점인 경기)
-drop_index = data[data['TEAM1_SCORE'] == -1].index
+drop_index = data[data['원정팀 점수'] == -1].index
 data.drop(drop_index, inplace=True)
 
 #기온 데이터 불러오기 
@@ -45,6 +47,16 @@ data = pd.merge(left=data, right=data_asos, how='left',
                 on=['asos', '날짜'], sort=True)
 
 data.drop(data.columns[7], axis=1, inplace=True)
+
+#특정팀의 승리경기 추출
+kia_home_match = data[data['홈팀'] == 'KIA']
+kia_home_wins = kia_home_match[kia_home_match['홈팀 점수'] > kia_home_match['원정팀 점수']]
+
+kia_away_match = data[data['원정팀'] == 'KIA']
+kia_away_wins = kia_away_match[kia_away_match['원정팀 점수'] > kia_away_match['홈팀 점수']]
+
+kia_wins = pd.concat([kia_home_wins, kia_away_wins])
+
 
 print(data.dtypes)
 print(data_asos.dtypes)

@@ -135,10 +135,10 @@ for index_split in range(0, len(split)):
     team1.append(''.join([i for i in split[index_split][0] if not i.isdigit()]))
     team2.append(''.join([i for i in split[index_split][1] if not i.isdigit()]))
 
-df.insert(3, 'TEAM1', team1, True)  
-df.insert(4, 'TEAM1_SCORE', team1_score, True)
-df.insert(5, 'TEAM2', team2, True)
-df.insert(6, 'TEAM2_SCORE', team2_score, True) 
+df.insert(3, '원정팀', team1, True)  
+df.insert(4, '원정팀 점수', team1_score, True)
+df.insert(5, '홈팀', team2, True)
+df.insert(6, '홈팀 점수', team2_score, True) 
 
 #비고 삭제
 df = df.drop(['비고', '경기'], axis=1)
