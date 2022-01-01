@@ -32,6 +32,12 @@ data = data.sort_values('날짜')
 drop_index = data[data['원정팀 점수'] == -1].index
 data.drop(drop_index, inplace=True)
 
+drop_index = data[data['홈팀'] == "드림"].index
+data.drop(drop_index, inplace=True)
+
+drop_index = data[data['홈팀'] == "나눔"].index
+data.drop(drop_index, inplace=True)
+
 #기온 데이터 불러오기 
 data_asos = pd.read_csv('asos_data.csv')
 data_asos['날짜'] = pd.to_datetime(data_asos['날짜'])
