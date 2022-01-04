@@ -144,7 +144,7 @@ df.insert(6, '홈팀 점수', team2_score, True)
 df = df.drop(['비고', '경기'], axis=1)
 
 print(df)
-df.to_excel("2018~2020 KBO 경기 결과.xlsx")
+df.to_excel("2018~2021 KBO 경기 결과.xlsx")
 
 
 

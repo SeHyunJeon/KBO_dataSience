@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 #데이터 불러오기
-data = pd.read_excel('2018~2020 KBO 경기 결과.xlsx')
+data = pd.read_excel('2018~2021 KBO 경기 결과.xlsx')
 
 #읽어드린 엑셀 데이터의 1열 및 1행이 nan 값임. 따라서 삭제
 data.drop(data.columns[0], axis=1, inplace=True)
